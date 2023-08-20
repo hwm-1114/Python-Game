@@ -66,7 +66,7 @@ game_over = False
 clock = pygame.time.Clock()
 
 # 游戏循环
-
+# 原点在左上角，所以y轴的正方向是向下的
 while not game_over:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -95,6 +95,9 @@ while not game_over:
     window.fill(black)
 
     # 绘制蛇身
+    # pygame.draw.rect是用来绘制矩形的函数
+    # window是绘图的目标窗口
+    # [segment[0], segment[1], 20, 20]表示矩形的左上角x坐标，y坐标，宽度和高度
     for segment in snake_body:
         pygame.draw.rect(window, green, [segment[0], segment[1], 20, 20])
     
@@ -124,9 +127,12 @@ while not game_over:
         game_over = True
     
     # 刷新游戏窗口
+    # 调用该函数可以确保实时更新图像，显示动画和响应用户输入，确保游戏画面的流畅性和即时性
     pygame.display.update()
 
     # 控制游戏频率
+    # 每秒钟执行10帧
+    # 限制程序的运行速度，确保每秒钟只执行10次程序代码
     clock.tick(10)
 
 # 游戏结束，退出
